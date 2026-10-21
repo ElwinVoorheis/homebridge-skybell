@@ -2,7 +2,7 @@
 id: 001-media-gateway
 rfc: RFC-0001
 title: Media Gateway
-status: draft
+status: approved
 created: 2026-10-21
 author: Elwin Voorheis
 requested_by: Elwin Voorheis
@@ -13,6 +13,7 @@ extends: []
 depends_on: []
 builds_against: []
 amends: []
+approved_by: [noreply@anthropic.com]
 ---
 
 # Spec: Media Gateway
