@@ -29,7 +29,10 @@ Two independent parts share this repo:
 - **Photo:** web → `GET /api/devices/:id/media/photo` → server asks the source adapter → bytes returned with content type.
 - **Live video:** web or a restream rule → server starts a SkyBell live call → FFmpeg reads the SRTP
   input and pushes RTSP to MediaMTX path `<device>` → Frigate reads `rtsp://<host>:8554/<device>`,
-  web plays the same path over WebRTC/HLS. The server stops the call when no one is reading.
+  web plays the same path over WebRTC/HLS. Streams are on demand (RFC-0001): MediaMTX's
+  `runOnDemand` hook asks the server to start the live call when the first reader connects, and
+  the unready hook stops it when readers drop to zero. A failed or dropped call is retried up to
+  3 times (2 s / 4 s / 8 s), then the session ends; the next reader starts fresh.
 
 ## Tech stack and tools
 TypeScript (strict), Node 22, Fastify, React 18, Vite, Vitest, ESLint, Prettier, FFmpeg, MediaMTX,

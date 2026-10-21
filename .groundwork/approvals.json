@@ -1,0 +1,12 @@
+{
+  "DECISIONS/RFC-0001-media-gateway.md": {
+    "hash": "c3b9e3162701c8410356bcfed10068609a95ec7846dd34b6dfe975a68634ab8a",
+    "signers": [
+      {
+        "who": "noreply@anthropic.com",
+        "at": "2026-10-21T21:41:36+0000"
+      }
+    ],
+    "changes": 0
+  }
+}

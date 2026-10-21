@@ -1,7 +1,7 @@
 ---
 id: RFC-0001
 title: Media Gateway
-status: draft
+status: approved
 classification: internal
 signoffs_required: 1
 requested_by: Elwin Voorheis
@@ -12,6 +12,7 @@ related_rfcs: []
 author: Elwin Voorheis
 created: 2026-10-21
 support: [Elwin Voorheis]
+approved_by: [noreply@anthropic.com]
 ---
 
 # RFC-0001 — Media Gateway
