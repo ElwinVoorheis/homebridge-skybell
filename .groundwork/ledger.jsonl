@@ -1,0 +1,4 @@
+{"ts": "2026-10-21T15:56:50+0000", "event": "created", "ref": "RFC-0001-media-gateway", "by": "noreply@anthropic.com"}
+{"ts": "2026-10-21T21:39:05+0000", "event": "requested", "ref": "RFC-0001-media-gateway", "by": "noreply@anthropic.com", "who": ["Elwin Voorheis"]}
+{"ts": "2026-10-21T21:39:05+0000", "event": "owner", "ref": "RFC-0001-media-gateway", "by": "noreply@anthropic.com", "who": ["Elwin Voorheis"]}
+{"ts": "2026-10-21T21:39:06+0000", "event": "support", "ref": "RFC-0001-media-gateway", "by": "noreply@anthropic.com", "who": ["Elwin Voorheis"]}
