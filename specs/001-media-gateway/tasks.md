@@ -91,7 +91,7 @@ created: 2026-10-21
   - **Files:** `.github/workflows/media-gateway.yml`
   - **Done when:** workflow passes on the branch
   - **Covers:** NFR-9
-- [ ] **T018** — README (setup, Frigate example, LAN/proxy-only warning, host-network fallback); update ARCHITECTURE, AGENTS, CODEMAP
+- [x] **T018** — README (setup, Frigate example, LAN/proxy-only warning, host-network fallback); update ARCHITECTURE, AGENTS, CODEMAP
   - **Files:** `media-gateway/README.md`, `ARCHITECTURE.md`, `AGENTS.md`, `CODEMAP.md`
   - **Done when:** `groundwork.py fresh` is clean
   - **Covers:** NFR-3

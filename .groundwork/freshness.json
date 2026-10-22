@@ -1,11 +1,12 @@
 {
   "AGENTS.md": {
-    "at": "2026-10-22T01:27:55+0000",
+    "at": "2026-10-22T01:42:27+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792632475,
+    "epoch": 1792633347,
     "hash": "59d702f6447e2694",
     "snapshot": {
       "signals": {
+        ".github/workflows/media-gateway.yml": "6862b7c4f8705fe3",
         "media-gateway/package.json": "97e8f0a055a2aee3",
         "media-gateway/server/package.json": "f17cebe9f2faf8cf",
         "media-gateway/web/package.json": "018b8fe24462cb35",
@@ -14,10 +15,10 @@
     }
   },
   "ARCHITECTURE.md": {
-    "at": "2026-10-22T01:27:55+0000",
+    "at": "2026-10-22T01:42:27+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792632475,
-    "hash": "1790dc3cadc925b9",
+    "epoch": 1792633347,
+    "hash": "668ab4b76d4d8d9f",
     "snapshot": {
       "layout": {
         "mode": "\"standard\"",
@@ -28,6 +29,7 @@
         "RFC-0001-media-gateway"
       ],
       "signals": {
+        ".github/workflows/media-gateway.yml": "6862b7c4f8705fe3",
         "media-gateway/docker-compose.yml": "7d61895565e2f7e9",
         "media-gateway/package.json": "97e8f0a055a2aee3",
         "media-gateway/server/Dockerfile": "45f3f602bebb2bff",

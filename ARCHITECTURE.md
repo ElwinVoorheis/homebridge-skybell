@@ -44,8 +44,10 @@ Vitest, MSW, Playwright + axe-core (browser and accessibility checks), ESLint, P
 
 ## Deployment and environments
 Docker Compose in `media-gateway/` (server, web, MediaMTX), run beside Frigate on the home LAN.
-One environment (home). GitHub Actions runs format, lint, type check and tests on every push and
-publishes server and web images to GHCR (`ghcr.io`). Roll back by redeploying the previous image tag.
+One environment (home). GitHub Actions (`.github/workflows/media-gateway.yml`) runs format, lint, type
+check, unit tests, Playwright browser checks and the MediaMTX end-to-end test on every push; a `vX.Y.Z` tag
+publishes `ghcr.io/<owner>/skybell-gateway-{server,web}:X.Y.Z` and `:latest`. Roll back by setting
+`GATEWAY_VERSION` to the previous tag and `docker compose up -d`. Setup guide: `media-gateway/README.md`.
 
 ## Boundaries and contracts
 - Source adapters implement the `MediaSource` interface in server core; core never imports adapters.

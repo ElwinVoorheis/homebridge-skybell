@@ -76,9 +76,27 @@ jobs:
         env:
           MEDIAMTX_BIN: /tmp/mediamtx/mediamtx
 
+  # Proves the Dockerfiles build on every push; only tagged builds are published (below).
+  images:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        image: [server, web]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/build-push-action@v6
+        with:
+          context: media-gateway
+          file: media-gateway/${{ matrix.image }}/Dockerfile
+          push: false
+      - name: Check the compose file
+        if: matrix.image == 'server'
+        run: cp .env.example .env && INTERNAL_SECRET=ci-placeholder-secret docker compose config --quiet
+
   publish:
     if: startsWith(github.ref, 'refs/tags/v')
-    needs: [checks, ui, e2e]
+    needs: [checks, ui, e2e, images]
     runs-on: ubuntu-24.04
     permissions:
       contents: read
