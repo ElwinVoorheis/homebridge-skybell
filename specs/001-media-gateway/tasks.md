@@ -73,7 +73,7 @@ created: 2026-10-21
   - **Files:** `web/src/api/*`, `web/src/screens/DeviceList.tsx` (+ tests), router setup
   - **Done when:** AC-11 and AC-14 tests pass
   - **Covers:** FR-9, FR-12
-- [ ] **T014** — Device screen: snapshot + Refresh, RTSP address + Copy
+- [x] **T014** — Device screen: snapshot + Refresh, RTSP address + Copy
   - **Files:** `web/src/screens/DeviceScreen.tsx` (+ tests)
   - **Done when:** AC-13 and AC-15 tests pass; failed refresh keeps the old image
   - **Covers:** FR-11, FR-13, FR-12

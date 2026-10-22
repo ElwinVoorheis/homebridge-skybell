@@ -7,7 +7,7 @@ Read this before searching the code: it says where each kind of code lives.
 
 **Layout:** standard (service profile, root media-gateway/server/src)
 New code goes in its role folder; `groundwork.py layout` shows the rules.
-**Languages:** JavaScript/TypeScript (50 files)
+**Languages:** JavaScript/TypeScript (54 files)
 
 ## Folders
 
@@ -24,7 +24,7 @@ New code goes in its role folder; `groundwork.py layout` shows the rules.
 | `media-gateway/web` | no role | 1 | React web app package config (Vite, Vitest, Playwright). |
 | `media-gateway/web/src` | no role | 4 | React app: `api/` server client, `screens/`, `player/` (WebRTC/HLS), `theme.css`. |
 | `media-gateway/web/src/api` | no role | 2 | Typed fetch client for the server API (shape-checked) and TanStack Query hooks. |
-| `media-gateway/web/src/screens` | no role | 2 | Route screens (device list, device) and shared loading/error states. |
+| `media-gateway/web/src/screens` | no role | 5 | Route screens (device list, device) and shared loading/error states. |
 
 ## Outside systems (where they are called)
 
@@ -50,7 +50,7 @@ Secrets: read from environment variables; locally from `.env` (git-ignored); nam
 - `media-gateway/server/src/entrypoints` (2 files)
 - `media-gateway/server/test` (3 files)
 - `media-gateway/web/src` (1 files)
-- `media-gateway/web/src/screens` (1 files)
+- `media-gateway/web/src/screens` (2 files)
 
 ## Notes
 
