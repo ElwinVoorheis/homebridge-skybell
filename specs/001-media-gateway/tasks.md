@@ -87,7 +87,7 @@ created: 2026-10-21
   - **Covers:** NFR-6, NFR-7
 
 ### Slice 5 — ship
-- [ ] **T017** — CI workflow: checks, Playwright, e2e on push; GHCR publish on `v*` tags
+- [x] **T017** — CI workflow: checks, Playwright, e2e on push; GHCR publish on `v*` tags
   - **Files:** `.github/workflows/media-gateway.yml`
   - **Done when:** workflow passes on the branch
   - **Covers:** NFR-9
