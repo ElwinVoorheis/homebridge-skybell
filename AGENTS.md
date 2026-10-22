@@ -49,6 +49,10 @@ Read `CODEMAP.md` first. Legacy plugin = root `*.js` (do not edit). Gateway serv
 (standard layout: `core/`, `connectors/<system>/`, `entrypoints/http/`, `config/`, wiring in `main.ts`).
 Gateway web = `media-gateway/web/src` (React; talks only to the server's REST API and MediaMTX).
 
+## Commands (run in `media-gateway/`)
+- Install: `npm ci` (add deps with `npm install -w server|web <pkg>`; dev tools shared at the root with `npm install -D`)
+- Test: `npm test` · Lint: `npm run lint` (`lint:fix`) · Types: `npm run typecheck` · Format: `npm run format:check` (`format`)
+
 ## Conventions agents get wrong
 - Node 22 + npm workspaces inside `media-gateway/`; never add deps to the root `package.json` (that is the legacy plugin).
 - TypeScript strict, ESM. Tests next to the code as `*.test.ts(x)`, run with Vitest. Write the failing test first.

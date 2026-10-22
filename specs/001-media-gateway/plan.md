@@ -22,7 +22,7 @@ created: 2026-10-21
 - **FFmpeg in the server container**, spawned with an argument list. Input: SDP (from the live call) on stdin, after
   UDP punch packets, as the legacy `camera.js` does. Video `-c:v copy` (H.264, no re-encode); audio PCM → Opus so
   WebRTC, HLS and Frigate all get sound. Output `-f rtsp rtsp://mediamtx:8554/<id>` (FR-3).
-- **Web:** React 18 + Vite, React Router (`/`, `/devices/:id`), TanStack Query for loading/error/retry (FR-12).
+- **Web:** React 19 + Vite (current major at build time), React Router (`/`, `/devices/:id`), TanStack Query for loading/error/retry (FR-12).
   Own WHEP client on `RTCPeerConnection` for WebRTC; HLS fallback via native playback (Safari) or hls.js (FR-10).
 - **Docker:** bridge networking first; host networking is the documented fallback if SkyBell UDP fails.
 - Deliberate departure from the legacy code: TypeScript + ESM + fetch instead of CommonJS + `request` (unmaintained).

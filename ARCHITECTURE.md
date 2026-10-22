@@ -22,7 +22,7 @@ Two independent parts share this repo:
 | --- | --- | --- | --- |
 | legacy plugin | HomeKit doorbell (frozen) | Node CommonJS | Elwin Voorheis |
 | gateway-server | Media sources, media kinds, restream lifecycle, REST API | Node 22, TypeScript strict, Fastify | Elwin Voorheis |
-| gateway-web | List devices, play live video, show photos | React 18, Vite, TypeScript | Elwin Voorheis |
+| gateway-web | List devices, play live video, show photos | React 19, Vite, TypeScript | Elwin Voorheis |
 | media server | Serve RTSP to other apps, WebRTC/HLS to browsers | MediaMTX (container) | Elwin Voorheis |
 
 ## Data flow
@@ -35,8 +35,8 @@ Two independent parts share this repo:
   3 times (2 s / 4 s / 8 s), then the session ends; the next reader starts fresh.
 
 ## Tech stack and tools
-TypeScript (strict), Node 22, Fastify, React 18, Vite, Vitest, ESLint, Prettier, FFmpeg, MediaMTX,
-npm workspaces. Third-party: SkyBell cloud (unpublished API, `https://cloud.myskybell.com/api/v3/`).
+TypeScript (strict), Node 22, Fastify 5, Zod 4, React 19, React Router, TanStack Query, hls.js, Vite,
+Vitest, MSW, ESLint, Prettier, FFmpeg, MediaMTX, npm workspaces. Third-party: SkyBell cloud (unpublished API, `https://cloud.myskybell.com/api/v3/`).
 
 ## Deployment and environments
 Docker Compose in `media-gateway/` (server, web, MediaMTX), run beside Frigate on the home LAN.
@@ -56,7 +56,8 @@ publishes server and web images to GHCR (`ghcr.io`). Roll back by redeploying th
 - **Risk:** SkyBell's API is unofficial and may have changed since 2021.
 
 ## Local development
-See `AGENTS.md` → Commands (filled when the gateway is scaffolded).
+From `media-gateway/`: `npm ci`, then `npm test`, `npm run lint`, `npm run typecheck`, `npm run format:check`.
+Full list in `AGENTS.md` → Commands.
 
 ## Code map
 Root JS files are the legacy plugin (see CODEMAP.md). New code lives under `media-gateway/`.

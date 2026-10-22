@@ -1,20 +1,23 @@
 {
   "AGENTS.md": {
-    "at": "2026-10-21T15:19:11+0000",
+    "at": "2026-10-22T00:28:02+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792595951,
-    "hash": "fdec6ade524cceb3",
+    "epoch": 1792628882,
+    "hash": "29269a6617d128a8",
     "snapshot": {
       "signals": {
+        "media-gateway/package.json": "97e8f0a055a2aee3",
+        "media-gateway/server/package.json": "e08b55d4ccf39ec1",
+        "media-gateway/web/package.json": "6e71d9aeb094486e",
         "package.json": "ad51db935661db3f"
       }
     }
   },
   "ARCHITECTURE.md": {
-    "at": "2026-10-21T21:42:01+0000",
+    "at": "2026-10-22T00:28:02+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792618921,
-    "hash": "42a2bfe581b68c00",
+    "epoch": 1792628882,
+    "hash": "46fd2f7ba8b161d2",
     "snapshot": {
       "layout": {
         "mode": "\"standard\"",
@@ -25,6 +28,9 @@
         "RFC-0001-media-gateway"
       ],
       "signals": {
+        "media-gateway/package.json": "97e8f0a055a2aee3",
+        "media-gateway/server/package.json": "e08b55d4ccf39ec1",
+        "media-gateway/web/package.json": "6e71d9aeb094486e",
         "package.json": "ad51db935661db3f"
       },
       "toplevel": [

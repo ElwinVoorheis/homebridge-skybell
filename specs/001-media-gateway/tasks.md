@@ -13,7 +13,7 @@ created: 2026-10-21
 > Mark a task `[x]` only after its "done when" is verified. One commit per task. Tests are written first in every task.
 
 ### Slice 0 — scaffold
-- [ ] **T001** — Workspace scaffold: npm workspaces, TS strict configs, ESLint, Prettier, Vitest; scripts `format`, `format:check`, `lint`, `lint:fix`, `typecheck`, `test`
+- [x] **T001** — Workspace scaffold: npm workspaces, TS strict configs, ESLint, Prettier, Vitest; scripts `format`, `format:check`, `lint`, `lint:fix`, `typecheck`, `test`
   - **Files:** `media-gateway/package.json`, `tsconfig.base.json`, `eslint.config.js`, `.prettierrc`, `server/package.json`, `web/package.json`, one smoke test per package
   - **Done when:** `groundwork.py verify` passes; AGENTS.md commands verified by running them
   - **Covers:** NFR-9
