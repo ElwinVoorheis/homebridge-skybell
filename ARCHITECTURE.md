@@ -35,7 +35,7 @@ Two independent parts share this repo:
   3 times (2 s / 4 s / 8 s), then the session ends; the next reader starts fresh.
 
 ## Tech stack and tools
-TypeScript (strict), Node 22, Fastify 5, Zod 4, React 19, React Router, TanStack Query, hls.js, Vite,
+TypeScript (strict), Node 22, Fastify 5, pino (logs, with secret redaction), Zod 4, React 19, React Router, TanStack Query, hls.js, Vite,
 Vitest, MSW, ESLint, Prettier, FFmpeg, MediaMTX, npm workspaces. Third-party: SkyBell cloud (unpublished API, `https://cloud.myskybell.com/api/v3/`).
 
 ## Deployment and environments
