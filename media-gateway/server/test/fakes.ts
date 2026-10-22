@@ -95,6 +95,7 @@ export class FakeHandle implements PublishHandle {
 
   /** Simulates the stream process dying on its own. */
   crash(): void {
+    this.stopped = true;
     this.resolveExit({ code: 1, requested: false });
   }
 }

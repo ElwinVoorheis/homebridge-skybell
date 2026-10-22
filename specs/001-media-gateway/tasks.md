@@ -43,7 +43,7 @@ created: 2026-10-21
   - **Covers:** FR-2, NFR-2
 
 ### Slice 3 — on-demand streaming
-- [ ] **T007** — Stream sessions in core: one per device, hold/release, retry 2/4/8 s, cancel on release, stop-all
+- [x] **T007** — Stream sessions in core: one per device, hold/release, retry 2/4/8 s, cancel on release, stop-all
   - **Files:** `server/src/core/stream-sessions.ts` (+ tests)
   - **Done when:** AC-6–AC-10 pass with fake clock, fake source and fake publisher
   - **Covers:** FR-5, FR-6, FR-7, FR-8
