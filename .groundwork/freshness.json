@@ -1,22 +1,22 @@
 {
   "AGENTS.md": {
-    "at": "2026-10-22T00:28:02+0000",
+    "at": "2026-10-22T00:51:21+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792628882,
+    "epoch": 1792630281,
     "hash": "29269a6617d128a8",
     "snapshot": {
       "signals": {
         "media-gateway/package.json": "97e8f0a055a2aee3",
-        "media-gateway/server/package.json": "e08b55d4ccf39ec1",
+        "media-gateway/server/package.json": "9849ac9b5684cf52",
         "media-gateway/web/package.json": "6e71d9aeb094486e",
         "package.json": "ad51db935661db3f"
       }
     }
   },
   "ARCHITECTURE.md": {
-    "at": "2026-10-22T00:28:02+0000",
+    "at": "2026-10-22T00:31:12+0000",
     "by": "noreply@anthropic.com",
-    "epoch": 1792628882,
+    "epoch": 1792629072,
     "hash": "46fd2f7ba8b161d2",
     "snapshot": {
       "layout": {
@@ -29,7 +29,7 @@
       ],
       "signals": {
         "media-gateway/package.json": "97e8f0a055a2aee3",
-        "media-gateway/server/package.json": "e08b55d4ccf39ec1",
+        "media-gateway/server/package.json": "9849ac9b5684cf52",
         "media-gateway/web/package.json": "6e71d9aeb094486e",
         "package.json": "ad51db935661db3f"
       },
