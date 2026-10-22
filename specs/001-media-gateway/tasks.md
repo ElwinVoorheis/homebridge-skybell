@@ -17,7 +17,7 @@ created: 2026-10-21
   - **Files:** `media-gateway/package.json`, `tsconfig.base.json`, `eslint.config.js`, `.prettierrc`, `server/package.json`, `web/package.json`, one smoke test per package
   - **Done when:** `groundwork.py verify` passes; AGENTS.md commands verified by running them
   - **Covers:** NFR-9
-- [ ] **T002** — Env config with Zod; `.env.example`; missing/invalid env fails fast with a clear message (no values printed)
+- [x] **T002** — Env config with Zod; `.env.example`; missing/invalid env fails fast with a clear message (no values printed)
   - **Files:** `server/src/config/env.ts` (+ test), `media-gateway/.env.example`
   - **Done when:** tests prove valid parse, missing var error, and that the error never contains the value
   - **Covers:** NFR-1
