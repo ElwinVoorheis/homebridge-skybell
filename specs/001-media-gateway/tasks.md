@@ -51,7 +51,7 @@ created: 2026-10-21
   - **Files:** `server/src/connectors/skybell/*` (+ tests)
   - **Done when:** MSW tests map the call reply to `LiveCall`; keys never logged
   - **Covers:** FR-5, NFR-1
-- [ ] **T009** — FFmpeg publisher: SDP builder, UDP punch, spawn with arg list, copy video, Opus audio, exit signal
+- [x] **T009** — FFmpeg publisher: SDP builder, UDP punch, spawn with arg list, copy video, Opus audio, exit signal
   - **Files:** `server/src/connectors/ffmpeg/publisher.ts` (+ tests)
   - **Done when:** stubbed-spawner tests check exact args (no shell), SDP text and exit handling
   - **Covers:** FR-3

@@ -7,7 +7,7 @@ Read this before searching the code: it says where each kind of code lives.
 
 **Layout:** standard (service profile, root media-gateway/server/src)
 New code goes in its role folder; `groundwork.py layout` shows the rules.
-**Languages:** JavaScript/TypeScript (34 files)
+**Languages:** JavaScript/TypeScript (36 files)
 
 ## Folders
 
@@ -18,7 +18,7 @@ New code goes in its role folder; `groundwork.py layout` shows the rules.
 | `media-gateway/server` | no role | 1 | Server package config (Vitest, tsconfig); code is in `src/` (standard layout), e2e fakes in `test/`. |
 | `media-gateway/server/src` | wiring | 1 | `main.ts`: reads config, builds connectors, injects them into core, starts the HTTP servers. |
 | `media-gateway/server/src/config` | config | 1 | the only place that reads env vars and secrets |
-| `media-gateway/server/src/connectors` | connectors | 3 | the only code that talks to outside systems (LLMs, databases, HTTP APIs, queues, email), one folder per system |
+| `media-gateway/server/src/connectors` | connectors | 4 | the only code that talks to outside systems (LLMs, databases, HTTP APIs, queues, email), one folder per system |
 | `media-gateway/server/src/core` | core | 6 | business logic, no I/O |
 | `media-gateway/server/src/entrypoints` | entrypoints | 4 | thin http/cli/worker handlers |
 | `media-gateway/web` | no role | 1 | React web app package config (Vite, Vitest, Playwright). |
@@ -43,7 +43,7 @@ Secrets: read from environment variables; locally from `.env` (git-ignored); nam
 ## Tests
 
 - `media-gateway/server/src/config` (1 files)
-- `media-gateway/server/src/connectors` (2 files)
+- `media-gateway/server/src/connectors` (3 files)
 - `media-gateway/server/src/core` (3 files)
 - `media-gateway/server/src/entrypoints` (1 files)
 - `media-gateway/server/test` (1 files)

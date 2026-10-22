@@ -37,7 +37,7 @@ export interface SrtpStream {
 export type StreamInput =
   | { readonly kind: 'srtp'; readonly video: SrtpStream; readonly audio: SrtpStream }
   // Any input FFmpeg can open directly; used by test sources.
-  | { readonly kind: 'url'; readonly url: string };
+  | { readonly kind: 'url'; readonly url: string; readonly format?: string };
 
 export interface LiveCall {
   readonly deviceId: string;
