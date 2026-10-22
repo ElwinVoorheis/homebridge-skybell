@@ -10,3 +10,5 @@ test.js
 .env
 .env.*
 !.env.example
+media-gateway/**/test-results/
+media-gateway/**/playwright-report/

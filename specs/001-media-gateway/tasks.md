@@ -81,7 +81,7 @@ created: 2026-10-21
   - **Files:** `web/src/player/*` (+ tests), `DeviceScreen.tsx`
   - **Done when:** AC-12 passes; player has an accessible name
   - **Covers:** FR-10, NFR-7
-- [ ] **T016** — Playwright + axe: 360 px and 1280 px, no sideways scroll, AA scan, keyboard walk
+- [x] **T016** — Playwright + axe: 360 px and 1280 px, no sideways scroll, AA scan, keyboard walk
   - **Files:** `web/e2e/*.spec.ts`, `web/playwright.config.ts`
   - **Done when:** AC-17 and AC-18 pass in Chromium
   - **Covers:** NFR-6, NFR-7
