@@ -97,7 +97,7 @@ created: 2026-10-21
   - **Covers:** NFR-3
 
 ## Verification
-- [ ] **T900** — `groundwork.py verify` passes (format, lint, types, tests)
-- [ ] **T901** — every FR in the spec maps to at least one completed task
+- [x] **T900** — `groundwork.py verify` passes (format, lint, types, tests)
+- [x] **T901** — every FR in the spec maps to at least one completed task
 - [ ] **T902** — the spec's manual-test section was run by hand and matches
-- [ ] **T903** — foundation docs (ARCHITECTURE/AGENTS/CONTRACTS/PROJECT) updated or explicitly unchanged; `groundwork.py fresh` is clean
+- [x] **T903** — foundation docs (ARCHITECTURE/AGENTS/CONTRACTS/PROJECT) updated or explicitly unchanged; `groundwork.py fresh` is clean
