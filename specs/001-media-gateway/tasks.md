@@ -27,7 +27,7 @@ created: 2026-10-21
   - **Files:** `server/src/core/{model,ports,media-kinds,devices,errors}.ts` (+ tests)
   - **Done when:** AC-1 and AC-5 tests pass; cache expiry test passes
   - **Covers:** FR-1, FR-4
-- [ ] **T004** — SkyBell client: login, token reuse, 401 re-login once, list devices; Zod reply schemas; MSW fixtures
+- [x] **T004** — SkyBell client: login, token reuse, 401 re-login once, list devices; Zod reply schemas; MSW fixtures
   - **Files:** `server/src/connectors/skybell/{client,source}.ts` (+ tests, fixtures)
   - **Done when:** mapping, re-login, bad-shape → `SourceUnavailable`, and no-secret-in-logs tests pass
   - **Covers:** FR-1, NFR-1
