@@ -1,5 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { useDevices } from '../api/queries';
+import { LivePlayer } from '../player/LivePlayer';
 import { RtspAddress } from './RtspAddress';
 import { Snapshot } from './Snapshot';
 import { ErrorMessage, Loading, messageOf } from './states';
@@ -26,6 +27,7 @@ export function DeviceScreen() {
           <div className="device-layout">
             {device.rtspUrl && (
               <div>
+                <LivePlayer deviceId={device.id} deviceName={device.name} />
                 <RtspAddress url={device.rtspUrl} />
               </div>
             )}

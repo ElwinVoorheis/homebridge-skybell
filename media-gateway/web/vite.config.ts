@@ -5,7 +5,15 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    proxy: { '/api': 'http://localhost:3000' },
+    // Same paths as nginx in production (web/nginx.conf).
+    proxy: {
+      '/api': 'http://localhost:3000',
+      '/webrtc': {
+        target: 'http://localhost:8889',
+        rewrite: (path) => path.replace(/^\/webrtc/, ''),
+      },
+      '/hls': { target: 'http://localhost:8888', rewrite: (path) => path.replace(/^\/hls/, '') },
+    },
   },
   test: {
     environment: 'jsdom',

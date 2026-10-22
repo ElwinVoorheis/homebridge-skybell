@@ -77,7 +77,7 @@ created: 2026-10-21
   - **Files:** `web/src/screens/DeviceScreen.tsx` (+ tests)
   - **Done when:** AC-13 and AC-15 tests pass; failed refresh keeps the old image
   - **Covers:** FR-11, FR-13, FR-12
-- [ ] **T015** — Live player: WHEP client, HLS fallback (native or hls.js), "Live video unavailable" state
+- [x] **T015** — Live player: WHEP client, HLS fallback (native or hls.js), "Live video unavailable" state
   - **Files:** `web/src/player/*` (+ tests), `DeviceScreen.tsx`
   - **Done when:** AC-12 passes; player has an accessible name
   - **Covers:** FR-10, NFR-7
