@@ -52,6 +52,8 @@ Gateway web = `media-gateway/web/src` (React; talks only to the server's REST AP
 ## Commands (run in `media-gateway/`)
 - Install: `npm ci` (add deps with `npm install -w server|web <pkg>`; dev tools shared at the root with `npm install -D`)
 - Test: `npm test` · Lint: `npm run lint` (`lint:fix`) · Types: `npm run typecheck` · Format: `npm run format:check` (`format`)
+- End-to-end (real MediaMTX + FFmpeg, fake source): `MEDIAMTX_BIN=/path/to/mediamtx npm run test:e2e -w server`
+- Run the stack: `cp .env.example .env`, fill it in, `docker compose up -d --build`
 
 ## Conventions agents get wrong
 - Node 22 + npm workspaces inside `media-gateway/`; never add deps to the root `package.json` (that is the legacy plugin).
