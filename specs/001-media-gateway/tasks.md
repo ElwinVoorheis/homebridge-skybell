@@ -65,7 +65,7 @@ created: 2026-10-21
   - **Covers:** FR-3, FR-5, FR-7, NFR-4, NFR-9
 
 ### Slice 4 — web app
-- [ ] **T012** [P] — Theme tokens, layout grid, focus ring; contrast unit test on the tokens
+- [x] **T012** [P] — Theme tokens, layout grid, focus ring; contrast unit test on the tokens
   - **Files:** `web/src/theme.css`, `web/src/theme.test.ts`
   - **Done when:** every text/background token pair ≥ 4.5:1 in the test
   - **Covers:** NFR-5, NFR-7
