@@ -40,7 +40,7 @@ Two independent parts share this repo:
 
 ## Tech stack and tools
 TypeScript (strict), Node 22, Fastify 5, pino (logs, with secret redaction), Zod 4, React 19, React Router, TanStack Query, hls.js, Vite,
-Vitest, MSW, ESLint, Prettier, FFmpeg, MediaMTX, npm workspaces. Third-party: SkyBell cloud (unpublished API, `https://cloud.myskybell.com/api/v3/`).
+Vitest, MSW, Playwright + axe-core (browser and accessibility checks), ESLint, Prettier, FFmpeg, MediaMTX, npm workspaces. Third-party: SkyBell cloud (unpublished API, `https://cloud.myskybell.com/api/v3/`).
 
 ## Deployment and environments
 Docker Compose in `media-gateway/` (server, web, MediaMTX), run beside Frigate on the home LAN.
