@@ -69,7 +69,7 @@ created: 2026-10-21
   - **Files:** `web/src/theme.css`, `web/src/theme.test.ts`
   - **Done when:** every text/background token pair ≥ 4.5:1 in the test
   - **Covers:** NFR-5, NFR-7
-- [ ] **T013** — API client + device list screen with loading, empty, error/Try again
+- [x] **T013** — API client + device list screen with loading, empty, error/Try again
   - **Files:** `web/src/api/*`, `web/src/screens/DeviceList.tsx` (+ tests), router setup
   - **Done when:** AC-11 and AC-14 tests pass
   - **Covers:** FR-9, FR-12
