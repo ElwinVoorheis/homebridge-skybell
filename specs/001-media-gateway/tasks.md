@@ -23,7 +23,7 @@ created: 2026-10-21
   - **Covers:** NFR-1
 
 ### Slice 1 — devices end to end
-- [ ] **T003** — Core model, ports, media-kind registry, list devices with 60 s cache (fake source + fake clock)
+- [x] **T003** — Core model, ports, media-kind registry, list devices with 60 s cache (fake source + fake clock)
   - **Files:** `server/src/core/{model,ports,media-kinds,devices,errors}.ts` (+ tests)
   - **Done when:** AC-1 and AC-5 tests pass; cache expiry test passes
   - **Covers:** FR-1, FR-4
