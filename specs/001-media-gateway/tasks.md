@@ -55,7 +55,7 @@ created: 2026-10-21
   - **Files:** `server/src/connectors/ffmpeg/publisher.ts` (+ tests)
   - **Done when:** stubbed-spawner tests check exact args (no shell), SDP text and exit handling
   - **Covers:** FR-3
-- [ ] **T010** — Internal hold route on port 3001 with secret check; SIGTERM stops all sessions
+- [x] **T010** — Internal hold route on port 3001 with secret check; SIGTERM stops all sessions
   - **Files:** `server/src/entrypoints/http/internal-routes.ts` (+ tests), `server/src/main.ts`
   - **Done when:** 401 without secret, 404 unknown id, close → release tests pass
   - **Covers:** FR-5, FR-7, FR-8, NFR-2

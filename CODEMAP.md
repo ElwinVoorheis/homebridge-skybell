@@ -7,7 +7,7 @@ Read this before searching the code: it says where each kind of code lives.
 
 **Layout:** standard (service profile, root media-gateway/server/src)
 New code goes in its role folder; `groundwork.py layout` shows the rules.
-**Languages:** JavaScript/TypeScript (36 files)
+**Languages:** JavaScript/TypeScript (38 files)
 
 ## Folders
 
@@ -20,7 +20,7 @@ New code goes in its role folder; `groundwork.py layout` shows the rules.
 | `media-gateway/server/src/config` | config | 1 | the only place that reads env vars and secrets |
 | `media-gateway/server/src/connectors` | connectors | 4 | the only code that talks to outside systems (LLMs, databases, HTTP APIs, queues, email), one folder per system |
 | `media-gateway/server/src/core` | core | 6 | business logic, no I/O |
-| `media-gateway/server/src/entrypoints` | entrypoints | 4 | thin http/cli/worker handlers |
+| `media-gateway/server/src/entrypoints` | entrypoints | 5 | thin http/cli/worker handlers |
 | `media-gateway/web` | no role | 1 | React web app package config (Vite, Vitest, Playwright). |
 | `media-gateway/web/src` | no role | 1 | React app: `api/` server client, `screens/`, `player/` (WebRTC/HLS), `theme.css`. |
 
@@ -45,7 +45,7 @@ Secrets: read from environment variables; locally from `.env` (git-ignored); nam
 - `media-gateway/server/src/config` (1 files)
 - `media-gateway/server/src/connectors` (3 files)
 - `media-gateway/server/src/core` (3 files)
-- `media-gateway/server/src/entrypoints` (1 files)
+- `media-gateway/server/src/entrypoints` (2 files)
 - `media-gateway/server/test` (1 files)
 
 ## Notes
