@@ -23,8 +23,8 @@ New code goes in its role folder; `groundwork.py layout` shows the rules.
 | `media-gateway/server/src/entrypoints` | entrypoints | 5 | thin http/cli/worker handlers |
 | `media-gateway/web` | no role | 1 | React web app package config (Vite, Vitest, Playwright). |
 | `media-gateway/web/src` | no role | 4 | React app: `api/` server client, `screens/`, `player/` (WebRTC/HLS), `theme.css`. |
-| `media-gateway/web/src/api` | no role | 2 | [TODO: what this folder holds] |
-| `media-gateway/web/src/screens` | no role | 2 | [TODO: what this folder holds] |
+| `media-gateway/web/src/api` | no role | 2 | Typed fetch client for the server API (shape-checked) and TanStack Query hooks. |
+| `media-gateway/web/src/screens` | no role | 2 | Route screens (device list, device) and shared loading/error states. |
 
 ## Outside systems (where they are called)
 
