@@ -7,7 +7,7 @@ import { DeviceCatalog } from './core/devices.js';
 import { MediaKindRegistry, defaultMediaKinds } from './core/media-kinds.js';
 import type { MediaSource } from './core/ports.js';
 import { StreamSessions } from './core/stream-sessions.js';
-import { buildInternalApp } from './entrypoints/http/internal-routes.js';
+import { PUBLISH_USER, buildInternalApp } from './entrypoints/http/internal-routes.js';
 import { createLogger } from './entrypoints/http/logging.js';
 import { buildPublicApp } from './entrypoints/http/public-routes.js';
 
@@ -15,7 +15,10 @@ import { buildPublicApp } from './entrypoints/http/public-routes.js';
  * Wiring: plugs connectors into core and starts both HTTP servers.
  * `source` can be replaced (the e2e test passes a fake); production uses SkyBell.
  */
-export async function start(env: NodeJS.ProcessEnv, sourceOverride?: MediaSource): Promise<void> {
+export async function start(
+  env: NodeJS.ProcessEnv,
+  sourceOverride?: MediaSource,
+): Promise<{ stop: () => Promise<void> }> {
   const config = loadConfig(env);
   const logger = createLogger(config.logLevel);
 
@@ -29,8 +32,12 @@ export async function start(env: NodeJS.ProcessEnv, sourceOverride?: MediaSource
     );
   const kinds = new MediaKindRegistry(defaultMediaKinds);
   const catalog = new DeviceCatalog(source, kinds, systemClock);
+  // MediaMTX only accepts publishers that present the internal secret (see the internal auth route).
+  const publishUrl = new URL(config.mediamtxRtspUrl);
+  publishUrl.username = PUBLISH_USER;
+  publishUrl.password = config.internalSecret;
   const publisher = new FfmpegPublisher({
-    rtspBaseUrl: config.mediamtxRtspUrl,
+    rtspBaseUrl: publishUrl.toString().replace(/\/$/, ''),
     logger: logger.child({ component: 'ffmpeg' }),
   });
   const sessions = new StreamSessions({
@@ -45,17 +52,16 @@ export async function start(env: NodeJS.ProcessEnv, sourceOverride?: MediaSource
   const publicApp = buildPublicApp({ catalog, rtspPublicUrl: config.rtspPublicUrl, logger });
   const internalApp = buildInternalApp({ sessions, secret: config.internalSecret, logger });
 
-  const shutdown = async (): Promise<void> => {
+  const stop = async (): Promise<void> => {
     logger.info({}, 'Shutting down');
     // Live calls first, so no SkyBell call or FFmpeg process outlives the server.
     await sessions.stopAll();
     await Promise.all([publicApp.close(), internalApp.close()]);
   };
-  process.once('SIGTERM', () => void shutdown());
-  process.once('SIGINT', () => void shutdown());
 
   await publicApp.listen({ host: '0.0.0.0', port: config.publicPort });
   await internalApp.listen({ host: '0.0.0.0', port: config.internalPort });
+  return { stop };
 }
 
 export function exitOnStartupError(error: unknown): never {
@@ -66,5 +72,8 @@ export function exitOnStartupError(error: unknown): never {
 }
 
 if (import.meta.url === `file://${process.argv[1] ?? ''}`) {
-  start(process.env).catch(exitOnStartupError);
+  start(process.env).then(({ stop }) => {
+    process.once('SIGTERM', () => void stop());
+    process.once('SIGINT', () => void stop());
+  }, exitOnStartupError);
 }

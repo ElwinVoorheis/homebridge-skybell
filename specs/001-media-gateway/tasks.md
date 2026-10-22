@@ -59,8 +59,8 @@ created: 2026-10-21
   - **Files:** `server/src/entrypoints/http/internal-routes.ts` (+ tests), `server/src/main.ts`
   - **Done when:** 401 without secret, 404 unknown id, close → release tests pass
   - **Covers:** FR-5, FR-7, FR-8, NFR-2
-- [ ] **T011** — MediaMTX config, Dockerfiles, `docker-compose.yml`, e2e override with fake source; e2e test with ffprobe
-  - **Files:** `media-gateway/{mediamtx.yml,docker-compose.yml,docker-compose.e2e.yml}`, `server/Dockerfile`, `web/Dockerfile`, `server/test/{fake-source.ts,e2e.test.ts}`
+- [x] **T011** — MediaMTX config with publish auth, Dockerfiles, nginx, `docker-compose.yml`; e2e test (real MediaMTX binary, fake source) with ffprobe
+  - **Files:** `media-gateway/{mediamtx.yml,docker-compose.yml,.dockerignore}`, `server/Dockerfile`, `web/{Dockerfile,nginx.conf}`, `server/test/{fake-source.ts,e2e.test.ts}`, internal auth route
   - **Done when:** e2e reads the RTSP stream, and the call ends within 10 s after the reader leaves
   - **Covers:** FR-3, FR-5, FR-7, NFR-4, NFR-9
 

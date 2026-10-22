@@ -50,7 +50,8 @@ All new; nothing outside `media-gateway/` changes except CI and docs. Server roo
 | `web/src/player/` | web | WHEP client, HLS fallback, `LivePlayer` | FR-10 |
 | `web/src/screens/` | web | `DeviceList`, `DeviceScreen` (snapshot, refresh, copy) | FR-9, FR-11, FR-13 |
 | `web/src/theme.css` | web | NFR-5 tokens as CSS variables, focus ring, grid breakpoints | NFR-5–NFR-7 |
-| `mediamtx.yml`, `docker-compose.yml`, `docker-compose.e2e.yml`, `Dockerfile`s | deploy | runtime | NFR-9 |
+| `mediamtx.yml`, `docker-compose.yml`, `Dockerfile`s, `web/nginx.conf` | deploy | runtime; nginx serves the app and proxies `/api`, `/webrtc`, `/hls` | NFR-9 |
+| `server/test/e2e.test.ts` | test | real MediaMTX binary + server in-process + fake source; `ffprobe` on RTSP | NFR-8 |
 | `.github/workflows/media-gateway.yml` | CI | checks, e2e, publish to GHCR | NFR-9 |
 | `media-gateway/README.md`, `.env.example` | docs | setup, LAN-only warning, env names | NFR-3 |
 
@@ -66,13 +67,16 @@ one stream session per device id in a map — a second hold joins the existing s
 
 **Internal API, port 3001** — Docker network only, never published; header `X-Gateway-Secret: $INTERNAL_SECRET`
 required (constant-time compare) or 401.
-- `GET /internal/streams/:id/hold` → sends nothing until closed; open = session wanted (FR-5–FR-8).
+- `GET /internal/streams/:id/hold` → sends one line, then nothing until closed; open = session wanted (FR-5–FR-8).
+- `POST /internal/mediamtx/auth` (MediaMTX `authMethod: http`, no header) → 200 only for `publish` by user `gateway`
+  with the secret as password to a valid device path, or for `read`; else 401. Stops anyone on the LAN replacing a feed.
+  FFmpeg publishes to `rtsp://gateway:<secret>@mediamtx:8554/<id>`.
 
 **Core ports:** `MediaSource` (`listDevices`, `getPhoto`, `startLiveCall`, `stopLiveCall`); `StreamPublisher`
 (`publish(call, path)` → handle with `stop()` and `exited`); `Clock` (`sleep`, `now`) for testable retry timing (NFR-8).
 Media-kind registry entries: `{ kind, offeredBy(device) }` (FR-4).
 
-**Web → MediaMTX:** WHEP `/<id>/whep`, HLS `/<id>/index.m3u8` (FR-10).
+**Web → MediaMTX (same origin via nginx):** WHEP `/webrtc/<id>/whep`, HLS `/hls/<id>/index.m3u8` (FR-10).
 
 ## 5. Failure modes and edge cases
 - Live call or FFmpeg fails/exits while held → retry 2/4/8 s via `Clock`, then end the hold response (FR-8).
@@ -98,7 +102,7 @@ Test first for every AC (Constitution). Vitest for server and web; fake `Clock` 
 | HTTP routes | Fastify `inject()` | AC-2, AC-3, AC-4, internal 401, AC-16 (log capture) |
 | web components | Vitest + Testing Library + MSW | AC-11–AC-15 |
 | browser | Playwright (Chromium) + axe | AC-17 (AA contrast, keyboard), AC-18 (360 px, no scroll) |
-| end-to-end | compose + e2e override (fake source), `ffprobe` on RTSP | AC-6, AC-8 via real MediaMTX |
+| end-to-end | MediaMTX binary + in-process server + fake source, `ffprobe` on RTSP (`npm run test:e2e -w server`, `MEDIAMTX_BIN`) | AC-6, AC-7, AC-8 via real MediaMTX |
 | manual | spec §8 on the real doorbell | SkyBell API still works; NFR-4 timing |
 
 ## 7. Rollout and rollback

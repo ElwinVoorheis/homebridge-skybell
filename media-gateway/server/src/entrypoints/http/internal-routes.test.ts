@@ -107,3 +107,51 @@ describe('internal hold API', () => {
     expect(source.startCalls).toBe(4);
   });
 });
+
+describe('MediaMTX publish auth', () => {
+  let app: FastifyInstance;
+
+  beforeEach(async () => {
+    const source = new FakeSource();
+    const clock = new FakeClock();
+    const catalog = new DeviceCatalog(source, new MediaKindRegistry(defaultMediaKinds), clock);
+    const sessions = new StreamSessions({
+      source,
+      publisher: new FakePublisher(),
+      catalog,
+      clock,
+      logger: new MemoryLogger(),
+    });
+    app = buildInternalApp({ sessions, secret: SECRET, logger: createLogger('silent') });
+    await app.ready();
+  });
+
+  afterEach(async () => {
+    await app.close();
+  });
+
+  const auth = (payload: Record<string, unknown>) =>
+    app.inject({ method: 'POST', url: '/internal/mediamtx/auth', payload });
+
+  it('lets the gateway publish to a device path', async () => {
+    const res = await auth({ action: 'publish', user: 'gateway', password: SECRET, path: 'front' });
+    expect(res.statusCode).toBe(200);
+  });
+
+  it.each([
+    { action: 'publish', user: '', password: '', path: 'front' },
+    { action: 'publish', user: 'gateway', password: 'guess', path: 'front' },
+    { action: 'publish', user: 'admin', password: SECRET, path: 'front' },
+    { action: 'publish', user: 'gateway', password: SECRET, path: '../x' },
+    { action: 'api', user: 'gateway', password: SECRET, path: '' },
+    { nonsense: true },
+  ])('refuses %o', async (payload) => {
+    const res = await auth(payload);
+    expect(res.statusCode).toBe(401);
+  });
+
+  it('allows reading without credentials', async () => {
+    const res = await auth({ action: 'read', user: '', password: '', path: 'front' });
+    expect(res.statusCode).toBe(200);
+  });
+});

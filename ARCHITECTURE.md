@@ -33,6 +33,10 @@ Two independent parts share this repo:
   `runOnDemand` hook asks the server to start the live call when the first reader connects, and
   the unready hook stops it when readers drop to zero. A failed or dropped call is retried up to
   3 times (2 s / 4 s / 8 s), then the session ends; the next reader starts fresh.
+- **Publish auth:** MediaMTX asks the server (`POST /internal/mediamtx/auth`) before accepting a publisher; only
+  FFmpeg with the internal secret may publish, so nobody on the LAN can replace a doorbell feed. Reads are open.
+- **Web:** an nginx container serves the React app and proxies `/api` (server), `/webrtc` and `/hls` (MediaMTX)
+  on one origin; WebRTC media uses UDP 8189 straight to MediaMTX.
 
 ## Tech stack and tools
 TypeScript (strict), Node 22, Fastify 5, pino (logs, with secret redaction), Zod 4, React 19, React Router, TanStack Query, hls.js, Vite,
