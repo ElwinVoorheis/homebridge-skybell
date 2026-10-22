@@ -76,6 +76,8 @@ Media-kind registry entries: `{ kind, offeredBy(device) }` (FR-4).
 
 ## 5. Failure modes and edge cases
 - Live call or FFmpeg fails/exits while held → retry 2/4/8 s via `Clock`, then end the hold response (FR-8).
+  A stream that ran ≥ 30 s counts as healthy, so a later drop starts a fresh 3-retry budget (otherwise a doorbell
+  watched all day would stop after its third drop).
 - Hold closed during a retry wait → cancel the wait, stop any call; no orphan FFmpeg (FR-7).
 - Two holds for one device at once → map lookup is synchronous before any `await`, so only one start (FR-6).
 - SkyBell 401 → re-login once, then `SourceUnavailable` → 502 (spec §7).

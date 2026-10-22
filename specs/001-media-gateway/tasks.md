@@ -47,7 +47,7 @@ created: 2026-10-21
   - **Files:** `server/src/core/stream-sessions.ts` (+ tests)
   - **Done when:** AC-6–AC-10 pass with fake clock, fake source and fake publisher
   - **Covers:** FR-5, FR-6, FR-7, FR-8
-- [ ] **T008** — SkyBell live call start/stop in the connector
+- [x] **T008** — SkyBell live call start/stop in the connector
   - **Files:** `server/src/connectors/skybell/*` (+ tests)
   - **Done when:** MSW tests map the call reply to `LiveCall`; keys never logged
   - **Covers:** FR-5, NFR-1

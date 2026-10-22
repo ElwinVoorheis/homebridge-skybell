@@ -110,3 +110,65 @@ describe('SkyBellSource.getPhoto', () => {
     await expect(source().getPhoto('abc123')).rejects.toBeInstanceOf(SourceUnavailable);
   });
 });
+
+describe('SkyBellSource live calls', () => {
+  const callReply = {
+    incomingVideo: {
+      server: '203.0.113.7',
+      port: 40000,
+      payloadType: 99,
+      encoding: 'H264',
+      sampleRate: 90000,
+      key: 'c2VjcmV0LXNydHAta2V5LXNhbHQtMTIzNDU2Nzg5MA==',
+      ssrc: 1234,
+    },
+    incomingAudio: {
+      server: '203.0.113.7',
+      port: '40002',
+      payloadType: 100,
+      encoding: 'L16',
+      sampleRate: 8000,
+      channels: 1,
+      key: 'YXVkaW8ta2V5LXNhbHQtMTIzNDU2Nzg5MDEyMzQ1Ng==',
+      ssrc: 5678,
+    },
+  };
+
+  it('starts a call and maps the SRTP details', async () => {
+    server.use(
+      http.post(`${SKYBELL_URL}devices/abc123/calls/`, () => HttpResponse.json(callReply)),
+    );
+
+    const call = await source().startLiveCall('abc123');
+
+    expect(call.deviceId).toBe('abc123');
+    expect(call.input).toEqual({
+      kind: 'srtp',
+      video: callReply.incomingVideo,
+      audio: { ...callReply.incomingAudio, port: 40002 },
+    });
+  });
+
+  it('rejects a call reply without usable stream details', async () => {
+    server.use(
+      http.post(`${SKYBELL_URL}devices/abc123/calls/`, () =>
+        HttpResponse.json({ incomingVideo: { server: 'x' } }),
+      ),
+    );
+
+    await expect(source().startLiveCall('abc123')).rejects.toBeInstanceOf(SourceUnavailable);
+  });
+
+  it('stops a call', async () => {
+    let stopped = false;
+    server.use(
+      http.delete(`${SKYBELL_URL}devices/abc123/calls/`, () => {
+        stopped = true;
+        return new HttpResponse(null, { status: 204 });
+      }),
+    );
+
+    await source().stopLiveCall({ deviceId: 'abc123', input: { kind: 'url', url: 'x' } });
+    expect(stopped).toBe(true);
+  });
+});

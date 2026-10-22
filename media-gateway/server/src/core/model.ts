@@ -27,7 +27,7 @@ export interface SrtpStream {
   readonly payloadType: number;
   readonly encoding: string;
   readonly sampleRate: number;
-  readonly channels?: number;
+  readonly channels?: number | undefined;
   /** Base64 master key + salt. Secret: never log. */
   readonly key: string;
   readonly ssrc: number;

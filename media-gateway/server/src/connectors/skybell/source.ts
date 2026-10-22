@@ -10,6 +10,21 @@ const devicesReply = z.array(z.object({ id: deviceId, name: z.string() }));
 // Signed S3 links; https only so the server cannot be pointed at internal addresses.
 const avatarReply = z.object({ url: z.url({ protocol: /^https$/ }) });
 
+// Field names as used by the legacy `camera.js` SDP builder; numbers may arrive as strings.
+const int = z.coerce.number().int().nonnegative();
+const srtpStream = z.object({
+  // Goes into an SDP file: restrict to IP-address characters so nothing can inject SDP lines.
+  server: z.string().regex(/^[0-9A-Fa-f.:]{2,45}$/),
+  port: int.max(65535),
+  payloadType: int.max(127),
+  encoding: z.string().regex(/^[A-Za-z0-9-]{1,16}$/),
+  sampleRate: int,
+  channels: int.optional(),
+  key: z.string().regex(/^[A-Za-z0-9+/=]{16,128}$/),
+  ssrc: int,
+});
+const callReply = z.object({ incomingVideo: srtpStream, incomingAudio: srtpStream });
+
 const IMAGE_TYPES: Record<string, string> = {
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg',
@@ -44,11 +59,15 @@ export class SkyBellSource implements MediaSource {
     return { bytes, contentType: type };
   }
 
-  startLiveCall(): Promise<LiveCall> {
-    return Promise.reject(new Error('not implemented until T008'));
+  async startLiveCall(deviceId: string): Promise<LiveCall> {
+    const reply = await this.client.request('POST', `devices/${deviceId}/calls/`, callReply);
+    return {
+      deviceId,
+      input: { kind: 'srtp', video: reply.incomingVideo, audio: reply.incomingAudio },
+    };
   }
 
-  stopLiveCall(): Promise<void> {
-    return Promise.reject(new Error('not implemented until T008'));
+  async stopLiveCall(call: LiveCall): Promise<void> {
+    await this.client.request('DELETE', `devices/${call.deviceId}/calls/`, z.unknown());
   }
 }
