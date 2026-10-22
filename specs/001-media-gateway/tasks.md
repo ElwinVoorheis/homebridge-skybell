@@ -37,7 +37,7 @@ created: 2026-10-21
   - **Covers:** FR-1, FR-13, NFR-1, NFR-2
 
 ### Slice 2 — photo
-- [ ] **T006** — Photo: core `getPhoto`, SkyBell avatar URL + download, route with content type
+- [x] **T006** — Photo: core `getPhoto`, SkyBell avatar URL + download, route with content type
   - **Files:** `core/devices.ts`, `connectors/skybell/*`, `entrypoints/http/public-routes.ts` (+ tests)
   - **Done when:** AC-2, AC-3, AC-4 tests pass
   - **Covers:** FR-2, NFR-2

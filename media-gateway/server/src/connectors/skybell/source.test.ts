@@ -54,3 +54,59 @@ describe('SkyBellSource.listDevices', () => {
     await expect(source().listDevices()).rejects.toBeInstanceOf(SourceUnavailable);
   });
 });
+
+describe('SkyBellSource.getPhoto', () => {
+  it('downloads the avatar image with its content type (AC-2)', async () => {
+    const jpeg = new Uint8Array([0xff, 0xd8, 0xff, 0xe0]);
+    server.use(
+      http.get(`${SKYBELL_URL}devices/abc123/avatar/`, () =>
+        HttpResponse.json({ url: 'https://media.example.com/a/avatar.jpg?sig=1', createdAt: 'x' }),
+      ),
+      http.get('https://media.example.com/a/avatar.jpg', () =>
+        HttpResponse.arrayBuffer(jpeg.buffer, { headers: { 'content-type': 'image/jpeg' } }),
+      ),
+    );
+
+    expect(await source().getPhoto('abc123')).toEqual({ bytes: jpeg, contentType: 'image/jpeg' });
+  });
+
+  it('infers the type from the file name when the header is generic', async () => {
+    server.use(
+      http.get(`${SKYBELL_URL}devices/abc123/avatar/`, () =>
+        HttpResponse.json({ url: 'https://media.example.com/p.png?sig=1' }),
+      ),
+      http.get('https://media.example.com/p.png', () =>
+        HttpResponse.arrayBuffer(new Uint8Array([1]).buffer, {
+          headers: { 'content-type': 'binary/octet-stream' },
+        }),
+      ),
+    );
+
+    expect((await source().getPhoto('abc123')).contentType).toBe('image/png');
+  });
+
+  it('refuses a non-https avatar URL', async () => {
+    server.use(
+      http.get(`${SKYBELL_URL}devices/abc123/avatar/`, () =>
+        HttpResponse.json({ url: 'http://169.254.169.254/latest/meta-data' }),
+      ),
+    );
+
+    await expect(source().getPhoto('abc123')).rejects.toBeInstanceOf(SourceUnavailable);
+  });
+
+  it('refuses content that is not an image', async () => {
+    server.use(
+      http.get(`${SKYBELL_URL}devices/abc123/avatar/`, () =>
+        HttpResponse.json({ url: 'https://media.example.com/x.html?sig=1' }),
+      ),
+      http.get('https://media.example.com/x.html', () =>
+        HttpResponse.text('<script>alert(1)</script>', {
+          headers: { 'content-type': 'text/html' },
+        }),
+      ),
+    );
+
+    await expect(source().getPhoto('abc123')).rejects.toBeInstanceOf(SourceUnavailable);
+  });
+});

@@ -1,6 +1,7 @@
 import Fastify, { type FastifyBaseLogger, type FastifyInstance } from 'fastify';
 import type { DeviceCatalog } from '../../core/devices.js';
 import { videoStream } from '../../core/media-kinds.js';
+import { parseDeviceId } from './device-id.js';
 import { registerErrorHandling } from './errors.js';
 
 export interface PublicAppDeps {
@@ -21,6 +22,15 @@ export function buildPublicApp(deps: PublicAppDeps): FastifyInstance {
       ...d,
       rtspUrl: d.mediaKinds.includes(videoStream.kind) ? `${deps.rtspPublicUrl}/${d.id}` : null,
     }));
+  });
+
+  app.get('/api/devices/:id/media/photo', async (request, reply) => {
+    const photo = await deps.catalog.getPhoto(parseDeviceId(request.params));
+    return reply
+      .header('content-type', photo.contentType)
+      .header('cache-control', 'no-store')
+      .header('x-content-type-options', 'nosniff')
+      .send(Buffer.from(photo.bytes));
   });
 
   return app;
