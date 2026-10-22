@@ -31,7 +31,7 @@ created: 2026-10-21
   - **Files:** `server/src/connectors/skybell/{client,source}.ts` (+ tests, fixtures)
   - **Done when:** mapping, re-login, bad-shape → `SourceUnavailable`, and no-secret-in-logs tests pass
   - **Covers:** FR-1, NFR-1
-- [ ] **T005** — Public HTTP: `GET /api/devices`, id validation, error mapping, log redaction; `main.ts` wiring
+- [x] **T005** — Public HTTP: `GET /api/devices`, id validation, error mapping, log redaction; `main.ts` wiring
   - **Files:** `server/src/entrypoints/http/public-routes.ts` (+ tests), `server/src/main.ts`
   - **Done when:** `inject()` tests for 200, 502 and AC-16 log capture pass
   - **Covers:** FR-1, FR-13, NFR-1, NFR-2
