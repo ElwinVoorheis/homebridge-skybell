@@ -1,0 +1,37 @@
+# SkyBell media gateway. Usage: cp .env.example .env, fill it in, then `docker compose up -d`.
+# Keep these ports on your LAN or behind your reverse proxy: the gateway has no login of its own.
+services:
+  server:
+    image: ghcr.io/elwinvoorheis/skybell-gateway-server:${GATEWAY_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    env_file: .env
+    restart: unless-stopped
+    # No published ports: the web container proxies /api, MediaMTX uses the internal port.
+    # If SkyBell live video never arrives, switch to `network_mode: host` (UDP NAT issues).
+
+  mediamtx:
+    image: bluenviron/mediamtx:1.15.3-ffmpeg
+    environment:
+      INTERNAL_SECRET: ${INTERNAL_SECRET:?set INTERNAL_SECRET in .env}
+    volumes:
+      - ./mediamtx.yml:/mediamtx.yml:ro
+    ports:
+      - '8554:8554' # RTSP for Frigate and other apps
+      - '8189:8189/udp' # WebRTC media for browsers
+    depends_on:
+      - server
+    restart: unless-stopped
+
+  web:
+    image: ghcr.io/elwinvoorheis/skybell-gateway-web:${GATEWAY_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: web/Dockerfile
+    ports:
+      - '8080:8080'
+    depends_on:
+      - server
+      - mediamtx
+    restart: unless-stopped

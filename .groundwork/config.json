@@ -1,0 +1,37 @@
+{
+  "standard": "0.7.0",
+  "layout": {
+    "mode": "standard",
+    "profile": "service",
+    "root": "media-gateway/server/src",
+    "decided_by": "noreply@anthropic.com",
+    "decided": "2026-10-21"
+  },
+  "quality": {
+    "mode": "keep",
+    "commands": {
+      "format": [
+        "npm --prefix media-gateway run format:check"
+      ],
+      "lint": [
+        "npm --prefix media-gateway run lint"
+      ],
+      "types": [
+        "npm --prefix media-gateway run typecheck"
+      ],
+      "test": [
+        "npm --prefix media-gateway test"
+      ]
+    },
+    "decided_by": "noreply@anthropic.com",
+    "decided": "2026-10-18",
+    "fix": {
+      "format": [
+        "npm --prefix media-gateway run format"
+      ],
+      "lint": [
+        "npm --prefix media-gateway run lint:fix"
+      ]
+    }
+  }
+}
