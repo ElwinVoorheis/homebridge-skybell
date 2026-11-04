@@ -1,3 +1,6 @@
+> **New:** [`media-gateway/`](media-gateway/README.md) turns a SkyBell doorbell into an RTSP stream for Frigate
+> and a web viewer. The Homebridge plugin below is unchanged.
+
 :warning: **This project is no longer maintained.** :warning:<br>
 **Due to my SkyBell HD failing and the difficulty of obtaining a replacement I have replaced it with a Logitech Circle View Doorbell.**
 

@@ -1,4 +1,14 @@
 node_modules/
 package-lock.json
+# The media gateway pins its dependencies (CI uses `npm ci`)
+!media-gateway/package-lock.json
+media-gateway/**/dist/
 test.js
 *~
+
+# Local secrets (GroundWork): never commit them; list the names in .env.example
+.env
+.env.*
+!.env.example
+media-gateway/**/test-results/
+media-gateway/**/playwright-report/

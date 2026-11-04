@@ -1,0 +1,35 @@
+# MediaMTX config for the SkyBell media gateway.
+# The server service is reached at http://server:3001 on the Docker network; INTERNAL_SECRET comes from the environment.
+logLevel: info
+
+api: no
+metrics: no
+pprof: no
+playback: no
+rtmp: no
+srt: no
+
+rtspAddress: :8554
+hlsAddress: :8888
+webrtcAddress: :8889
+webrtcLocalUDPAddress: :8189
+# Browsers on another host must be told an address they can reach; set to the host's LAN IP in .env if needed.
+# webrtcAdditionalHosts: [192.168.1.10]
+
+# Only the gateway may publish (checked by the server); anyone who can reach the ports may read (NFR-3).
+authMethod: http
+authHTTPAddress: http://server:3001/internal/mediamtx/auth
+authHTTPExclude:
+  - action: read
+
+paths:
+  # One path per device id, created on demand when the first reader connects (FR-5).
+  '~^[A-Za-z0-9_-]{1,64}$':
+    # sh expands $INTERNAL_SECRET from the container env; $MTX_PATH only matches the id pattern above.
+    runOnDemand: >-
+      sh -c 'exec wget -qO- --header "X-Gateway-Secret: $INTERNAL_SECRET"
+      "http://server:3001/internal/streams/$MTX_PATH/hold"'
+    # SkyBell live calls take several seconds to start (NFR-4).
+    runOnDemandStartTimeout: 20s
+    # The live call ends this long after the last reader leaves (FR-7).
+    runOnDemandCloseAfter: 10s

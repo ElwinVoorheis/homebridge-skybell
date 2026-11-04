@@ -1,0 +1,22 @@
+{
+  "DECISIONS/RFC-0001-media-gateway.md": {
+    "hash": "c3b9e3162701c8410356bcfed10068609a95ec7846dd34b6dfe975a68634ab8a",
+    "signers": [
+      {
+        "who": "noreply@anthropic.com",
+        "at": "2026-10-21T21:41:36+0000"
+      }
+    ],
+    "changes": 0
+  },
+  "specs/001-media-gateway/spec.md": {
+    "hash": "4752db560d7ba4bf508023623b3fbf9475ba813621feda9e755e3a7308d7c950",
+    "signers": [
+      {
+        "who": "noreply@anthropic.com",
+        "at": "2026-10-21T22:17:10+0000"
+      }
+    ],
+    "changes": 0
+  }
+}
